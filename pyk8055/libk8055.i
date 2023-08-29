@@ -124,7 +124,7 @@ class k8055:
         """
         self.Buttons = 0
         self.dev = _K8055_CLOSED
-	self.Address = BoardAddress
+        self.Address = BoardAddress   # fix spaces to tab
         if debug == False:
             self.DebugOff()
         else:
@@ -135,7 +135,7 @@ class k8055:
                 # print "Open OK " + str(self.dev)
             except:
                 self.dev = _K8055_CLOSED 
-                raise IOError, "Could not open device"
+                raise IOError("Could not open device")
                 # print "Open error"
 
     def __str__(self):
@@ -166,7 +166,7 @@ class k8055:
         if self.__opentest() == False:    # Not open yet
             self.dev = _pyk8055.OpenDevice(BoardAddress)
             if self.dev == K8055_ERROR:
-                raise IOError, "Could not open device"
+                raise IOError("Could not open device")
             # print "Open OK " + str(self.dev)
         return self.dev
 

@@ -7,9 +7,12 @@
 # The Python version of qwt-*/examples/data_plot/data_plot.cpp
 
 import random, sys
-from qt import *
-from qwt import *
-from Numeric import *
+# from Qt import *
+# from qt import *
+from PyQt5 import *		# fix as Qt does not import
+from qwt import *		# fixed by pafoxp@sh67:~/velleman/code-k8055/pyk8055$ sudo apt-get install python3-qwt
+# from Numeric import *
+from numpy import *		# fix as Numeric does not import
 from pyk8055 import *
 
 

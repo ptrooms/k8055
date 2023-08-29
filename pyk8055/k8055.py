@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # $Id: k8055.py,v 1.2 2007/03/15 14:50:55 pjetur Exp $
 """
 Python version of K8055 command line program

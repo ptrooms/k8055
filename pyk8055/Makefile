@@ -7,9 +7,16 @@
 # We have to build extension "inplace" if We're to 
 # run samples locally without installing
 
+python_version_full := $(wordlist 2,4,$(subst ., ,$(shell python --version 2>&1)))
+python_version_major := $(word 1,${python_version_full})
+python_version_minor := $(word 2,${python_version_full})
+python_version_patch := $(word 3,${python_version_full})
+
+
 all: libk8055.i ../libk8055.c
 	python setup.py build_ext --inplace
 	python setup.py build
+	@echo 'Compiled for version $(shell python --version 2>&1)'
 
 # Or in plain language
 #	swig -python libk8055.i
@@ -18,10 +25,24 @@ all: libk8055.i ../libk8055.c
 #	ld -shared libk8055.o libk8055_wrap.o -lusb -o _pyk8055.so
 ##	mv -f pyk8055.py __init__.py
 
+
+.PHONY : info
+
+info:
+	@echo Python version ${python_version_full}
+# @echo ${python_version_major}
+# @echo ${python_version_minor}
+# @echo ${python_version_patch}
+
+
+
+
 .PHONY:	kdemo
 
+# problem pafoxp@sh67:~/.local/lib/python3.6/site-packages/PyQt5$ grep -r 'not created by Qt Designer' *
+# fix pyuic frmk8055qt.ui -o frmk8055qt.py  # pyuic not found
 kdemo: k8055qt.py frmk8055qt.ui frmk8055qt.ui.h
-	pyuic frmk8055qt.ui -o frmk8055qt.py
+	pyuic5 frmk8055qt.ui -o frmk8055qt.py
 
 # install will both make build and install 
 install:

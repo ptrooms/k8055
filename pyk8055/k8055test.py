@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # $Id: k8055test.py,v 1.3 2007/03/28 10:09:34 pjetur Exp $
 #
 # Sample pyton test program for pyk8055 wrapper

@@ -154,7 +154,7 @@ int read_param(int argc,char *params[])
 		else
 			if ( !strcmp(params[i],"-reset2") ) resetcnt2 = true;					
 		else
-			if ( !strcmp(params[i],"--help") ) {
+			if ( !strcmp(params[i],"--help") || !strcmp(params[i],"-h") || !strcmp(params[i],"-?") ) {
 				display_help(params);
 				return false;
 			}

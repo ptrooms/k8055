@@ -81,23 +81,25 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 
 
   //Inputs
-  new wxStaticBox(panel,-1,_("Inputs"), wxPoint(370,6),wxSize(170,45));
+  
+  new wxStaticBox(panel,-1,_("Inputs"), wxPoint(370,6),wxSize(195,45));
   I1=new wxCheckBox(panel,IDC_DIN1,_("1"), wxPoint(380,20));
-  I2=new wxCheckBox(panel,IDC_DIN2,_("2"), wxPoint(410,20));
-  I3=new wxCheckBox(panel,IDC_DIN3,_("3"), wxPoint(440,20));
-  I4=new wxCheckBox(panel,IDC_DIN4,_("4"), wxPoint(470,20));
-  I5=new wxCheckBox(panel,IDC_DIN5,_("5"), wxPoint(500,20));
+  I2=new wxCheckBox(panel,IDC_DIN2,_("2"), wxPoint(415,20));
+  I3=new wxCheckBox(panel,IDC_DIN3,_("3"), wxPoint(450,20));
+  I4=new wxCheckBox(panel,IDC_DIN4,_("4"), wxPoint(485,20));
+  I5=new wxCheckBox(panel,IDC_DIN5,_("5"), wxPoint(520,20));
 
-  //Outputs
-  new wxStaticBox(panel,-1,_("Outputs"), wxPoint(370,54),wxSize(260,45));
+  //Outputs wxALIGN_RIGHT  You are using wxWidgets 2.8, but RPCS3 requires wxWidgets 3.0.
+  new wxStaticBox(panel,-1,_("Outputs"), wxPoint(370,54),wxSize(300,45));
+ //   O1=new wxCheckBox(panel,IDC_DOUT1,_("1"), wxPoint(380,70), wxDefaultSize, wxALIGN_RIGHT);
   O1=new wxCheckBox(panel,IDC_DOUT1,_("1"), wxPoint(380,70));
-  O2=new wxCheckBox(panel,IDC_DOUT2,_("2"), wxPoint(410,70));
-  O3=new wxCheckBox(panel,IDC_DOUT3,_("3"), wxPoint(440,70));
-  O4=new wxCheckBox(panel,IDC_DOUT4,_("4"), wxPoint(470,70));
-  O5=new wxCheckBox(panel,IDC_DOUT5,_("5"), wxPoint(500,70));
-  O6=new wxCheckBox(panel,IDC_DOUT6,_("6"), wxPoint(530,70));
-  O7=new wxCheckBox(panel,IDC_DOUT7,_("7"), wxPoint(560,70));
-  O8=new wxCheckBox(panel,IDC_DOUT8,_("8"), wxPoint(590,70));
+  O2=new wxCheckBox(panel,IDC_DOUT2,_("2"), wxPoint(415,70));
+  O3=new wxCheckBox(panel,IDC_DOUT3,_("3"), wxPoint(450,70));
+  O4=new wxCheckBox(panel,IDC_DOUT4,_("4"), wxPoint(485,70));
+  O5=new wxCheckBox(panel,IDC_DOUT5,_("5"), wxPoint(520,70));
+  O6=new wxCheckBox(panel,IDC_DOUT6,_("6"), wxPoint(555,70));
+  O7=new wxCheckBox(panel,IDC_DOUT7,_("7"), wxPoint(590,70));
+  O8=new wxCheckBox(panel,IDC_DOUT8,_("8"), wxPoint(625,70));
 
   //Counters
   new wxStaticBox(panel,-1,_("Counter1"), wxPoint(370,110),wxSize(125,226));
@@ -106,8 +108,9 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 
   Counter1ResetButton=new wxButton(panel,IDC_RSTC1,_("Reset"),wxPoint(385,165),wxSize(90,30));
  
+  // see for wxRadioBox http://murank.github.io/wxwidgetsjp/2.9.4/classwx_radio_box.html
   wxString choix[4]={_("0ms"), _("2ms"), _("10ms") , _("1000ms")};
-  Counter1Debounce=new wxRadioBox(panel,IDC_DBCT1,_("Debounce Time"),wxPoint(375,215),wxSize(115,115),4, choix);
+  Counter1Debounce=new wxRadioBox(panel,IDC_DBCT1,_("Debounce"),wxPoint(375,200),wxSize(115,125),4, choix, 1); // ptro 24aug23 , use one column
   Counter1Debounce->SetSelection(1);
 
 
@@ -117,7 +120,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 
   Counter2ResetButton=new wxButton(panel,IDC_RSTC2,_("Reset"),wxPoint(520,165),wxSize(90,30));
 
-  Counter2Debounce=new wxRadioBox(panel,IDC_DBCT2,_("Debounce Time"),wxPoint(510,215),wxSize(115,115),4, choix);
+  Counter2Debounce=new wxRadioBox(panel,IDC_DBCT2,_("Debounce"),wxPoint(510,200),wxSize(115,125),4, choix, 1); // ptro 24aug23 , use one column
   Counter2Debounce->SetSelection(1);
 
   address=0;//default address
@@ -135,7 +138,8 @@ void MyFrame::OnBnClickedSK5(wxCommandEvent& WXUNUSED(event))
     }
     if (DEBUG) cout<<"SK5 value is "<<SK5->GetValue()<<endl<<"Board Address is "<<address<<endl;
 }
-void MyFrame::OnBnClickedSK6(wxCommandEvent& WXUNUSED(event))
+
+void MyFrame::OnBnClickedSK6(wxCommandEvent& WXUNUSED(event))
 {
     if (!connected)
     {
@@ -213,6 +217,7 @@ void MyFrame::OnBnClickedOutputtest(wxCommandEvent& WXUNUSED(event))
 {
     if (DEBUG) cout<<"OutputTest clicked!"<<endl;
     cout<<"Not yet implemented!"<<endl;
+    wxMessageBox(_T("Not yet implemented!"), _T("Error"), wxOK | wxICON_ERROR, this);
 //    O1->SetValue(1);
 //    O2->SetValue(0);
 //    O3->SetValue(0);
